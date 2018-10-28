@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/fortify.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="JS/top.js"></script>
+</head>
+<body>
+
+<div class="flex-container">
+  	<div class="name">
+		
+		
+		<div class="c">
+		<img class="img-responsive" src="images/fedex_freight.png" style="width:300px; height:50px;margin-top:30px;margin-lefy:10px;">
+		<div class="freight">Freight CI/CD</div>
+		</div>
+   	</div>
+<div class="flex-container2">
+
+ <table style="width:80%" align="center">
+<tr><td></td><td align="right"><a href="/Fedex_web_content/index.html" style="text-decoration: none;"><button  class="button" ><span>Home</span></button></a>
+</td>
+
+<!--  <td align="center"><a href="/Fedex_web_content" style="text-decoration: none;"><button  class="button1" ><span>Home</span></button></a>
+</td>-->
+<td><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button></td>
+</td></tr>
+<tr>
+<td>
+<h1 id="head">HP Fortify SCA</h1>
+
+
+<p> The Fortify SCA tool attempts to protect systems from security flaws in business-critical software applications. Fortify SCA drives down cost and risk by automating and enhancing key software audit, development, testing and deployment processes. Unlike traditional network security, Fortify SCA strengthens the software applications themselves so that hackers and malicious insiders cannot access vital assets or disrupt business processes. </p>
+
+
+<p>In addition to the Fortify SCA tool some of their other products are as follows: Fortify Tracer - the first and only automated solution that makes Black Box security testing actionable and measurable, Fortify Tester - the first black box security testing plug-in for Microsoft Visual Studio, Fortify Defender – the first and only intrusion prevention software solution for web applications already in deployment, and Fortify Manager - the definitive software security risk management dashboard.
+The tool that we have evaluated is the Fortify Source Code Analyzer (Fortify SCA) created by Fortify Software. Fortify software is a software security vendor of choice of government and Fortune 500 companies in a wide variety of industries. They provide products that identify and remediate security vulnerabilities in software in order to mitigate enterprise security risks.
+</p>
+
+
+<h2 id="head">Languages/Platform supported</h2>
+<p>Fortify SCA supports a wide variety of languages, frameworks and operating systems.</p>
+<li>Languages: ASP.NET, C/C++, C#, ColdFusion, Java, JSP, PL/SQL, T-SQL, XML, VB.NET and other .NET languages.</li>
+<li>Platforms: Windows, Solaris, Linux, Mac OS X, HP-UX, AIX.</li>
+<li>Frameworks: J2EE/EJB, Struts, Hibernate.</li>
+<li>IDEs: Microsoft Visual Studio, Eclipse, Web Sphere Application Developer, IBM Rational Application Developer</li>
+
+
+
+
+<h2 id="head">How it Works<h2 id="head"></h2>
+<p>Fortify SCA is a static analysis tool and it processes code in a manner similar to a code compiler. It uses a build tool that runs on a source code file or set of files and converts it into an intermediate model that is optimized for security analysis by Fortify. This model is put through a series of analyzers (Data flow, Semantic, Control Flow, Configuration, and Structural). Fortify SCA also uses Fortify Secure Coding Rule Packs to analyze the code base for violations of secure coding practices. Fortify Rules Builder allows to extend and expand analysis capabilities to include custom rules as well. The results can be viewed in a number of ways using the Audit Workbench and the Fortify Manager.</p>
+
+<center><img src="images/fortify1.png" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<h2 id="head">Capabilities/Features</h2>
+<p>Fortify SCA is used to find and fix following software vulnerabilities at the root cause: Buffer
+Overflow, Command Injection, Cross-Site Scripting, Denial of Service, Format String, Integer Overflow, Log Forging, Password, Management, Path Manipulation, Privacy Violation, Race Conditions, Session Fixation, SQL Injection, System Information Leak, and Unreleased Resource. It sorts, filters, prioritizes and categorizes the issues found in various forms for easy viewing and analysis through the Audit Workbench and Fortify Manager. The results can also be exported as a report in formats such as html and xml. The SCA tool supports integration with black box security testers such as Watchfire’s Appscan and it also supports integration with Findbugs for central security and quality issue reporting.
+</p>
+
+<h2 id="head">TOOL AND EXPERIMENTS SETUP</h2>
+
+<h3 id="head">Tool Setup</h3>
+<p>
+The SCA tool comes in three editions: Enterprise, Team, and Developer. We used the Team Edition which is intended for smaller organizations, and consists of Fortify SCA, Fortify Audit Workbench, and Fortify Rules Builder. We believe this edition will be the most relevant and interesting to other MSE and MSIT students because the majority of studio and practicum projects are being done in a Windows environment with small teams. The tool was downloaded with the evaluation license from www.fortifysoftware.com.</p>
+
+
+
+
+<h2 id="head">How to Use</h2>
+<p>An analysis can be performed with the Fortify SCA tool in two steps:</p>
+<li>Use the command line to run the source analyzer on the project source files and obtain a .fpr file.</li>
+<li>Use the Audit workbench or Fortify Manager on the .fpr file to explore the results of the analysis.</li>
+
+<p>The first step in performing an analysis involves running a series of commands at the command line prompt to build the source files. For Java projects, the classpath and the source folder or file must be provided. For C/C++ projects, a makefile is required. Once the build is successful, a .fpr file is generated on which we ran the Audit Workbench to analyze the results.</p>
+
+<p>The screenshot shows the Fortify Audit workbench used to analyze the Crystal code base:</p>
+
+
+<center><img src="images/fortify2.png" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+
+<h2 id="head">BENEFITS AND DRAWBACKS</h2>
+
+<h3 id="head">Benefits</h3>
+<li>The Fortify SCA tool provides powerful analysis techniques, including patent pending multi-tier data flow analysis and interactive results viewing. It helps prioritize security risks and thus helps to bring high risk vulnerabilities to the forefront.</li>
+<li>Fortify SCA efficiently processes large, complex code bases and presents discovered security issues in a well categorized form that makes reporting and remediation significantly faster.</li>
+<li>Fortify SCA uses the knowledge base of secure coding guidelines and thus brings required expertise and consistency to developers and allows security experts to leverage their knowledge across more projects.</li>
+<li>The tool provides support for multiple languages and platforms.</li>
+<li>The tool is easy to setup and does not require any extra work other than building the source files.</li>
+
+<h3 id="head">Drawbacks</h3>
+<li>The SCA tool cannot catch design intentions or analyze the existing design for soundness.</li>
+<li>There are some usability issues in the build phase of using the tool since this has to be performed through the command line and with the availability of makefiles in some instances.</li>
+<li>Fortify SCA suffers from what is called the “black box problem”. For reactive applications and heterogeneous systems, execution does not always take place in available application code. For instance, in reaction to a mouse click, a reactive application can start executing in kernel code to pass the event over and around the operating system. This part of its execution can rarely be analyzed and therefore, static analysis tools can hardly determine what type of data comes out of these calls.</li>
+<li>Fortify SCA has issues with discovering bugs from aliasing and considering method calls (it does not cover all execution paths).</li>
+
+
+
+
+</td></tr>
+</table>
+</div>
+<div class="syntel"><center>Syntel FXF-DevOps-Automation</center></div>
+</div>
+</body>
+</html>

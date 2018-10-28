@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+<link rel="stylesheet" type="text/css" href="css/sonar_eclipse.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="JS/top.js"></script>
+</head>
+<body>
+<div class="flex-container">
+  	<div class="name">
+		
+		
+		<div class="c">
+		<img class="img-responsive" src="images/fedex_freight.png" style="width:300px; height:50px;margin-top:30px;margin-lefy:10px;">
+		<div class="freight">Freight CI/CD</div>
+		</div>
+   	</div>
+<div class="flex-container2">
+
+ <table style="width:80%" align="center">
+<tr><td></td><td align="right"><a href="/Fedex_web_content/index.html" style="text-decoration: none;"><button  class="button" ><span>Home</span></button></a>
+</td>
+
+<!--  <td align="center"><a href="/Fedex_web_content" style="text-decoration: none;"><button  class="button1" ><span>Home</span></button></a>
+</td>-->
+<td><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button></td>
+</td></tr>
+<tr>
+<td>
+<h1 id="head">SonarQube & SonarLint</h1>
+
+<h2 id="head">SonarQube Server</h2>
+<p>SonarQube is an open source platform for continuous inspection of code quality. The platform receives the source code as an input. This code can either be sent from IDE or pulled from SCM. There are SonarQube plugins for the most popular IDEs that make running code analyses much easier. Based on the input, the platform starts to apply predefined rules and check if they are fulfilled. As an analysis output, a lot of useful information and propose improvements are provided as well.</p>
+
+
+
+
+
+<p>Following is instruction-set to get setup with SonarQube:</p>
+
+
+<li>Get SonarQube Server form FOSS</li>
+<br>
+
+<center><img src="images/sonar1.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+<li>Unzip the file.</li>
+<li>Go to <install_directory>/bin folder. </li>
+<li>You would find different folders related with OS platforms. </li>
+<li>Select the folder according to your OS platform. </li>
+
+<br>
+
+<center><img src="images/sonar2.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+<li>Find different batch scripts files for this system, *.bat file such as InstallNTService.bat, StartNTService.bat, StartSonar.bat etc.</li>
+<li>Copy the path of this folder which may look like S<install_directory>/bin/Windows-x86-, and append it to “Path” environment variable.</li>
+<br>
+
+
+<center><img src="images/sonar3.jpg" align="middle" style="width:500px;height:250px;border:solid;border-color:black"></center>
+
+<br>
+<li>Open a command prompt, type “StartSonar” command and execute. This would start a web server at default port of 9000.</li>
+<br>
+
+<center><img src="images/sonar4.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+<br>
+
+<li>Open a web browser and access the page, http://localhost:9000. You shall see the page such as that shown in the screenshot below. This would imply that you have been able to successfully start your SonarQube server.</li>
+
+<br>
+
+<center><img src="images/sonar5.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+<li>If you see the SonarQube dashboard, that would imply that you have been able to successfully start your SonarQube server. </li>
+<br>
+</ol>
+
+<h2 id="head">SonarLint</h2>
+<p>SonarLint is an Eclipse plugin that provides on-the-fly feedback to developers on new bugs and quality issues injected into Java, JavaScript and PHP code. </p>
+<p>SonarLint offers a fully-integrated user experience in Eclipse-based IDEs. After installing the plugin issues will be reported as Eclipse markers. </p>
+<p>Note that it requires Java 8 to run. </p>
+
+<br>
+
+<p>Follow the instruction to setup Sonarlint with Eclipse Plugin</p>
+
+
+<li>Get SonarLint plugin from FOSS, if it is not available then download it from Eclipse Market place</li>
+
+<li>Click on Help-> Install new software. As shown below</li>
+
+<br>
+<center><img src="images/sonar6.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+<li>Add the path where Sonarlint plugin setup is downloaded. As shown below. </li>
+
+<br>
+<center><img src="images/sonar7.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+<li>Click on select All and click on next</li>
+
+<br>
+<center><img src="images/sonar8.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+
+<li>Select “I accept” radio button. </li>
+
+
+
+<li>And click on Finish. As shown below</li>
+
+
+</ol>
+
+<br>
+<center><img src="images/sonar9.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+<h3 id="head">Connect to SonarQube Server in Eclipse</h3>
+
+<p>First step is to connect to your SonarQube server:</p>
+
+
+
+<li>Open SonarQube server view, In SonarQube server view, right click and choose New -> SonarLint -> SonarQube Servers. As shown below</li>
+<br>
+<center><img src="images/sonar10.jpg" align="middle" style="width:500px;height:300px;border:solid;border-color:black"></center>
+
+<br>
+
+
+
+
+
+<li>Complete connection details (URL and credentials).</li>
+
+
+<li>Make sure that SonarQube server is up.</li>
+
+<li>Test connection</li>
+
+<li>Click "Finish" to close the wizard and start updating configuration from the server</li>
+
+<br>
+<center><img src="images/sonar11.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+<li>You can manage your SonarQube server connections in the "SonarQube Servers" view. To manually trigger an update of local configuration (if remote SonarQube configuration has changed): right click on a server and use the "update" action as shown below.</li>
+
+<br>
+<center><img src="images/sonar12.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+<li>Now you can bind one or more Eclipse project(s) to their remote SonarQube pair. Right click on project -> "SonarLint -> Bind with remote SonarQube server..."</li>
+
+<br>
+<center><img src="images/sonar13.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+<li>Select the project that you want to bind and click on finish button.</li>
+
+<br>
+<center><img src="images/sonar14.png" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+
+</ol>
+
+<h3 id="head">
+Sonar Analyzer and Sonar Reports
+</h3>
+
+<p>Analyze source code using SonarLint</p>
+
+
+<li>Right Click on selected project >Sonarlint > Analyze </li>
+<br>
+<center><img src="images/sonar15.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+<li>You will see the below console in eclipse. </li>
+
+<br>
+<center><img src="images/sonar16.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+<li>In order to see the sonar report browse  :  <a> http://localhost:9000/dashboard?id=my%3Ashipment</a></li>
+
+<br>
+<center><img src="images/sonar17.jpg" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<br>
+</ol>
+
+
+
+<td></tr>
+</table>
+</div>
+<div class="syntel"><center>Syntel FXF-DevOps-Automation</center></div>
+</div>
+</html>

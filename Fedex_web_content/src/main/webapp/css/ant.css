@@ -1,0 +1,173 @@
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    height: 9000px;
+    background-color: white;
+	
+	  
+	background-size: 1255px  8000px;
+	
+
+}
+
+.name{
+height:105px;
+    background-color: #3F0094;
+    width: 100%;
+    height: 100px;
+    
+position: absolute;
+z-index:2;
+}
+.b{
+
+background-color:white;
+margin-top:10px;
+margin-left:10px;
+position:absolute;
+z-index:3;
+
+}
+
+.freight{color:white;font-size:50px;margin-left:900px;margin-top:-60px;position:relative;z-index:3;}
+.devops{color:#FF9610;font-size:60px}
+
+.c{
+margin-top:-5px;
+margin-left:10px;
+z-index:3;
+}
+
+
+.flex-container2 {
+    
+    width: 1004px;
+    height: 8800px;
+    background-color:white;
+border:solid;
+border-color:#3F0094;
+position: absolute;
+margin-top:150px;
+margin-left:125.5px;
+}
+#head{
+color:#3F0094;}
+
+#font{
+color:black;}
+
+.button{
+z-index:2;
+position:absolute;
+margin-top:25px;
+margin-left:-45px;
+height:35px;
+width:70px;
+ text-align: center;
+    text-decoration: none;
+	color:white;
+	background-color:#FF5D06;
+	border-radius: 12px;
+}
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.button1{
+z-index:2;
+position:absolute;
+margin-top:4040px;
+margin-left:-450px;
+height:35px;
+width:70px;
+ text-align: center;
+    text-decoration: none;
+	color:white;
+	background-color:#FF5D06;
+	border-radius: 12px;
+}
+.button1 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button1 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button1:hover span {
+  padding-right: 25px;
+}
+
+.button1:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 30px;
+  z-index: 10;
+  border: none;
+  outline: none;
+  background-color: #FF5D06;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+.pdf{
+border-style:solid;
+border-color:black;	
+width:800px;
+height:1000px;
+}
+
+.syntel{
+width:100%;
+height:20px;
+background-color:black;
+position:absolute;
+margin-top:9000px;
+right:-5px;
+opacity:0.7;
+color:white;
+z-index:99;  
+}

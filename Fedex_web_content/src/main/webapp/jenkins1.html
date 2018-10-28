@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/jenkins1.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="JS/top.js"></script>
+</head>
+<body>
+<div class="flex-container">
+  	<div class="name">
+		
+		
+		<div class="c">
+		<img class="img-responsive" src="images/fedex_freight.png" style="width:300px; height:50px;margin-top:30px;margin-lefy:10px;">
+		<div class="freight">Freight CI/CD</div>
+		</div>
+   	</div>
+
+	
+<div class="flex-container2">
+
+ <table style="width:80%" align="center">
+<tr><td></td><td align="right"><a href="/Fedex_web_content/index.html" style="text-decoration: none;"><button  class="button" ><span>Home</span></button></a>
+</td>
+
+<!--  <td align="center"><a href="/Fedex_web_content" style="text-decoration: none;"><button  class="button1" ><span>Home</span></button></a>
+</td>-->
+<td><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button></td>
+</td></tr>
+
+<tr>
+<td>
+<h1 id="head">Jenkins</h1>
+<h2 id="head">Setup of Build job in Jenkins</h2>
+<ul>
+<li>Click on New Item to create new job.</li> 
+<li>Enter an item name as Build.</li>
+<li>Select Freestyle project and click on Ok.</li>
+<li>A Build job will be displayed on dashboard.</li>
+<li>Click on Build job.</li>
+<li>Click on Configure Link.</li><br>
+</ul>
+
+<h2 id="head">Code Checkout</h2>
+<p id="font">Jenkins Workspace can be created for code checkout by configuring the directory path (like mentioned below) .Jenkins will copy the developer Change Set from SVN/GIT repository to Jenkins build server workspace.</p>
+<center><img src="images/buildjob.png" align="middle" style="width:800px;height:528px;border:solid;border-color:black"></center>
+
+<h2 id="head">Execution of Build</h2>
+<p id="font">Once the checkout is complete, Jenkins will invoke the setting.xml path to clean and will install the build with below Jenkins configuration.</p>
+<center><img src="images/buildjob1.png" align="middle" style="width:800px;height:350px;border:solid;border-color:black"></center>
+
+
+
+<h2 id="head">Verify Reports and Artifacts created by Build</h2>
+
+<p id="font">On successful build execution, Reports and Artifacts (JUnit, JaCoCo, and Sonar) will be generated. By verifying these reports, Jenkins will analyze if threshold value is up to the mark and will notify to the developer accordingly.</p>
+ 
+<p id="font">E.g.:  If the threshold is less than 80%, Jenkins will not use the respective code for deployment and notifies to the developer.</p>
+
+<h2 id="head">Copy Artifacts to Nexus repository</h2>
+
+<p id="font">Jenkins will verify the reports and artifacts and then it will push the previous build to Nexus repository.</p>
+
+<center><img src="images/buildjob3.png" align="middle" style="width:800px;height:200px;border:solid;border-color:black"></center>
+</td></tr>
+</table>
+</div>
+<div class="syntel"><center>Syntel FXF-DevOps-Automation</center></div>
+</div>
+</body>
+</html>

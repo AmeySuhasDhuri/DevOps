@@ -1,0 +1,80 @@
+stage 'checkout'
+node() {
+    
+    echo '*************Checkout started*************'
+    
+   checkout([$class: 'SubversionSCM',
+    additionalCredentials: [],
+     excludedCommitMessages: '', 
+     excludedRegions: '', 
+     excludedRevprop: '', excludedUsers: '', filterChangelog: false, 
+     ignoreDirPropChanges: false, includedRegions: '',
+      locations: [[credentialsId: 'admin', depthOption: 'infinity',
+       ignoreExternalsOption: true, local: '.', remote: 'https://synps8154805.syntelorg.com/svn/DevOpsRepo/Fedex_web_content']],
+        workspaceUpdater: [$class: 'UpdateUpdater']])
+
+                
+       echo '*************Checkout completed*************'         
+                 
+}
+
+stage 'Build'
+node() {
+    echo '*************Build started*************'
+    bat 'mvn clean compile package site'
+    echo '*************Build completed*************'        
+                 
+}
+
+
+stage 'JUnit'
+node(){
+echo "*************JUnit Analysis Started*************"
+ junit '**/target/surefire-reports/*.xml'
+      archive 'target/*.war'
+echo "*************JUnit Analysis completed*************"
+}
+
+stage 'JaCoCo'
+node(){
+echo "*************JaCoCo Analysis Started*************"
+jacoco classPattern: '**/target/classes ', execPattern: '**/target/**.exec'
+echo "*************JaCoCo Analysis completed************"
+}
+
+
+
+stage 'PMD'
+node(){
+
+echo "*************PMD Analysis Started*************"
+pmd canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+echo "*************PMD Analysis completed************"
+}
+
+stage 'checkstyle'
+node(){
+echo "*************checkstyle Analysis Started*************"
+checkstyle canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''
+echo "*************checkstyle Analysis completed************"
+}
+
+
+
+stage 'FindBug'
+node(){
+
+echo "*************FindBug Analysis Started*************"
+findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '', unHealthy: ''
+echo "*************FindBug Analysis completed************"
+}
+
+stage 'Sonar'
+node(){
+
+echo "*************Sonar Analysis Started*************"
+withSonarQubeEnv('My Sonar Server'){
+bat 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+echo "*************Sonar Analysis completed************"
+}
+}

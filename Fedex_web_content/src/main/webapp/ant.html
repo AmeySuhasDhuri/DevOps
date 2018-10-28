@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ant.css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="JS/top.js"></script>
+
+</head>
+<body>
+<div class="flex-container">
+  	<div class="name">
+		
+		
+		<div class="c">
+		<img class="img-responsive" src="images/fedex_freight.png" style="width:300px; height:50px;margin-top:30px;margin-left:10px;">
+		<div class="freight">Freight CI/CD</div>
+		</div>
+   	</div>
+<div class="flex-container2">
+
+ <table style="width:80%" align="center">
+<tr><td></td><td align="right"><a href="/Fedex_web_content/index.html" style="text-decoration: none;"><button  class="button" ><span>Home</span></button></a>
+</td>
+
+<!--  <td align="center"><a href="/Fedex_web_content" style="text-decoration: none;"><button  class="button1" ><span>Home</span></button></a>
+-->
+<td><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button></td>
+</td></tr>
+<tr>
+<td>
+<h1 id="head">Apache Ant</h1>
+<p>Apache Ant is a general purpose Java based build tool from Apache Software Foundation. Ant is an abbreviation for Another Neat Tool.</p>
+
+<p> Apache Ant's build files are written in XML and they take advantage of being open standard, portable and easy to understand. Ant is primarily used for building and deploying Java projects but can be used for every possible repetitive tasks, e.g. generating documentation.</p>
+
+<h2 id="head">Recommended migration from Ant to Maven</h2>
+
+<p>Refer the below document for migration from ant to maven.
+</p>
+</td>
+</tr>
+
+<!--  <center>
+<table>
+
+<td style="border:1px solid;">
+<div class="pdf">
+<object type="application/pdf" data="Document/ANT.pdf" " width="800px" height="1000px"/object >"
+</div>
+
+
+</td>-->
+
+<tr>
+<td>
+<h1 id="head"> Migration Steps</h1>
+
+
+ <h2 id="head">1. Understand the Source Code Structure:</h2>
+
+
+   <p> In application source code, it would be divided across multiple projects
+    i.e. web project, Java project, Generic projects etc. It is essential to
+    understand the purpose of these projects, the dependencies of one project
+    over the other and what third party Jars are required to build a particular
+    project etc.</p>
+ 
+ <p>   Once you have understood the source code organization and its dependencies
+    it's time to document them.
+
+</p>
+<p>
+    Let's assume we have the below mentioned projects associated with an
+    application.
+</p>
+<p>
+    1. "scheduling" is a standalone module and it is the first project which
+    gets built.
+    <br/>
+    2. "Source" is dependent on scheduling.
+    <br/>
+    3. "Portal" is dependent on scheduling and source.
+</p>
+<p>
+    After you have analysed the projects and understood the dependencies create
+    the below table:
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="66" valign="top">
+                <p>
+                    Sr No.
+                </p>
+            </td>
+            <td width="114" valign="top">
+                <p>
+                    Module
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Module Dependencies
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    JAR Dependencies
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="66" valign="top">
+                <p>
+                    1.
+                </p>
+            </td>
+            <td width="114" valign="top">
+                <p>
+                    Scheduling
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Independent
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Weblogic.jar
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="66" valign="top">
+                <p>
+                    2.
+                </p>
+            </td>
+            <td width="114" valign="top">
+                <p>
+                    Source
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Scheduling
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    castor.jar
+                </p>
+                <p>
+                    commons-httpclient-2.0-rc1.jar
+                </p>
+                <p>
+                    dom4j.jar
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="66" valign="top">
+                <p>
+                    3.
+                </p>
+            </td>
+            <td width="114" valign="top">
+                <p>
+                    Portal
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Scheduling, source
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    castor.jar
+                </p>
+                <p>
+                    commons-httpclient-2.0-rc1.jar
+                </p>
+                <p>
+                    dom4j.jar
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <h2 id="head">2: Understand the Existing ANT script:</h2>
+
+<p>
+    This is one of the complex tasks involved when migrating from ANT to Maven.
+    A thorough understanding of the existing ANT build process is necessary if
+    you want to migrate from
+</p>
+<p>
+    ANT to Maven.
+</p>
+<p>
+    In some of the applications where migrated from ANT to Maven, we had to
+    analyze many
+
+    Ant build scripts. Some of these ANT scripts were not even been used in the
+    build process,
+
+    some had dead code in them.
+</p>
+<p>
+    Steps to understand the existing ANT scripts:
+</p>
+<p>
+    1. Document the environment variables used by ANT. Variables can be found
+    in OS environment Variables as well as in build.cmd file.
+</p>
+<p>
+    e.g.
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    <strong>Environment Variable</strong>
+                </p>
+            </td>
+            <td width="174" valign="top">
+                <p>
+                    <strong>Value</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    APP_ROOT_DIR
+                </p>
+            </td>
+            <td width="174" valign="top">
+                <p>
+                    D:/workspace
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    WEBLOGIC_HOME
+                </p>
+            </td>
+            <td width="174" valign="top">
+                <p>
+                    D:/oracle/middleware
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    2. List down all the ANT scripts available in different Eclipse projects.
+</p>
+<p>
+    3. Manually try to understand each ANT script.
+</p>
+<p>
+    a. List down the properties been used.
+</p>
+<p>
+    e.g.
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    <strong>Property</strong>
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    <strong>Value</strong>
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>Actual Value</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    build.property.file.name
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${project.dir}/build/build.properties
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/build/build.properties
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    current.src.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${project.dir}/src
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/src
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    weblogic.home
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${bea.home}/wlserver_10.3
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/Oracle/Middleware/wlserver_10.3
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    weblogic.server.lib.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${weblogic.home}/server/lib
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/Oracle/Middleware/wlserver_10.3/server/lib
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    b. List down the directories been created
+</p>
+<p>
+    e.g.
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    <strong>Property</strong>
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    <strong>Value</strong>
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    <strong>Actual Value</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    build.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${project.dir}/build
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/build
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    staging.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${project.dir}/staging
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/staging
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    webapp.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${staging.dir}/webapp
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/webapp
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    application.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${staging.dir}/application
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/application
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    build.classes.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${build.dir}/classes
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/classes
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    build.dist.parent.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${build.dir}/dist
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/dist
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    build.dist.dir
+                </p>
+            </td>
+            <td width="240" valign="top">
+                <p>
+                    ${build.dist.parent.dir}/app2
+                </p>
+            </td>
+            <td width="258" valign="top">
+                <p>
+                    D:/workspace/app2
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    c. List down all the ANT targets and tasks, what each target/task do.
+</p>
+<p>
+    e.g.
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="148" valign="top">
+                <p>
+                    <strong>Target</strong>
+                </p>
+            </td>
+            <td width="85" valign="top">
+                <p>
+                    <strong>Dependency</strong>
+                </p>
+            </td>
+            <td width="91" valign="top">
+                <p>
+                    <strong>Logical Path</strong>
+                </p>
+            </td>
+            <td width="144" valign="top">
+                <p>
+                    <strong>Physical Path </strong>
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    <strong>Comment</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="148" valign="top">
+                <p>
+                    Prepare
+                </p>
+            </td>
+            <td width="85" valign="top">
+                <p>
+                    init
+                </p>
+            </td>
+            <td width="91" valign="top">
+                <p>
+                    ${build.dir}
+                </p>
+            </td>
+            <td width="144" valign="top">
+                <p>
+                    D:/workspace/build
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Creates directories
+                </p>
+                <p>
+                    Prints "preparing target directories"
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="148" valign="top">
+                <p>
+                    copy_admin_properties
+                </p>
+            </td>
+            <td width="85" valign="top">
+                <p>
+                    init
+                </p>
+            </td>
+            <td width="91" valign="top">
+                <p>
+                    ${base.dir}/properties
+                </p>
+            </td>
+            <td width="144" valign="top">
+                <p>
+                    D:/workspace/src/properties
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Copies admin properties file.
+                </p>
+                <p>
+                    Prints "Copying portal property files".
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="148" valign="top">
+                <p>
+                    compileSrc
+                </p>
+            </td>
+            <td width="85" valign="top">
+                <p>
+                    Prepare
+                </p>
+            </td>
+            <td width="91" valign="top">
+                <p>
+                    ${batch.src.dir}
+                </p>
+                <p>
+                    (Source)
+                </p>
+                <p>
+                    ${batch.classes.dir}
+                </p>
+                <p>
+                    (Destination)
+                </p>
+            </td>
+            <td width="144" valign="top">
+                <p>
+                    D:/workspace/source/src
+                </p>
+            </td>
+            <td width="156" valign="top">
+                <p>
+                    Compiles java source files.
+                </p>
+                <p>
+                    Prints "Compiling Java source files for module Source".
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    d. List down all the artifacts created.
+</p>
+<p>
+    4. Determine the parent ANT script which calls sub ANT scripts.
+</p>
+<p>
+    5. Determine the sequence in which the sub ANT scripts are called.
+</p>
+<p>
+    E.g.
+</p>
+<pre>                    <;target name="all" depends="prepare, clean, wlw.sched.build,</pre>
+<pre>                     app.common.classes.jar, package"/>;</pre>
+
+<strong>Targets are called in the following order:</strong><br><br>
+<strong>all</strong><br>
+<strong>prepare</strong><br>
+<strong>clean</strong><br>
+<strong>wlw.sched.build</strong><br>
+<strong>app.common.classes.jar</strong><br>
+<strong>package</strong><br>
+
+<pre>                    compileall
+                    package.portal.ear
+                    package.commonaccess.war
+                    compileall</pre>
+
+<strong>prepare:</strong>
+<pre>       		     init</pre>
+
+<strong>compileall:</strong><br>
+<pre>                    compileSource
+                    prepare
+                    compile
+                    compilePORTAL
+                    prepare
+                    compile
+                    copy_database_scripts
+                    prepare</pre>
+
+<strong>package.commonaccess.war:</strong><br>
+<pre>                    prepare</pre>
+
+<strong>package.portal.ear:</strong><br>
+<pre>                    package.gui.ear
+                    package.mdb
+                    package.entity.ejb...</pre>    
+
+<br>
+<p>
+    6. Determine the dependency of one ANT script over the other.
+</p>
+<p>
+    7. Run the ANT scripts with verbose and debug ON so that you can understand
+    how the
+</p>
+<p>
+    build happens.
+</p>
+<p>
+    8. Try to correlate your manual understanding (Step 2) with ANT log output
+    (Step 6).
+</p>
+<p>
+    9. Determine the source code present in Eclipse project is used for
+    creating different artifacts.
+</p>
+<p>
+    In one of the eclipse projects we need to create 3 artifacts - 1 jar, 1
+    Entity Bean Jar and 1 Session Bean Jar.
+</p>
+<p>
+    E.g.
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    <strong>Project</strong>
+                </p>
+            </td>
+            <td width="174" valign="top">
+                <p>
+                    <strong>Artifacts</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    scheduling
+                </p>
+            </td>
+            <td width="174" valign="top">
+                <p>
+                    JAR
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="126" valign="top">
+                <p>
+                    source
+                </p>
+            </td>
+            <td width="174" valign="top">
+                <p>
+                    JAR, Entity JAR, Session JAR
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    This is needed because based on the number of artifacts created using 1
+    project you may end up creating that many POM files.
+</p>
+
+   <h2 id="head">3: Install Maven Third Party JARs:</h2>
+
+<p>
+    1. Using Step 1 identify the list of third party JARs which are needed for
+    the build.<br>
+    2. Determine whether the jars are available in Maven Central repository or
+    Client Maven central repository.
+<br>
+    3. If jars are available in Maven repository then we need not install the
+    jars manually into central repository/local repository.
+<br>
+    4. If jars are not available then we have to install the JARs manually.
+
+    e.g.
+<br>
+    mvn install:install-file -Dfile=D:\workspace\JARs\lib\castor.jar
+    -DgroupId=org.exolab -DartifactId=castor -Dversion=1.0 -Dpackaging=jar
+<br>
+    mvn install:install-file -Dfile=D:\workspace\JARs\lib\dom4j.jar
+    -DgroupId=org.dom4j -DartifactId=dom4j -Dversion=1.0 -Dpackaging=jar
+<br>
+    5. While installing the JARs we need to determine the value to be used for
+    '-Dversion'.
+</p>
+<p>
+    The version can be present either in the JAR file name itself or as a part
+    of manifest file within the JAR. If it is not present in both these places
+    then we need to use a default value. Make sure you use a unique value so
+    that you don't overwrite anything in Maven repository.
+</p>
+<p>
+    Note:
+    Create an automated script to install the JARs. Since the JARs might have
+    to be installed in different local maven repositories first and then in the
+    central repository, by automating we can save time and eliminate errors.
+</p>
+
+   <h2 id="head">4. Application Server JARs:</h2>
+
+
+<p>
+    If you are using an Enterprise Appserver i.e. Websphere, Weblogic and if
+    the JARs provided by the Appserver are needed for building the application
+    then you need to decide whether these JARs can be accessed from the
+    Appserver installation directory or you want to install these JARs as well
+    in the Maven repository.
+</p>
+<p>
+    Would strongly recommend to use the JARs from the installation directory
+    since if you start installing the Appserver JARs it can turn out to be a
+    never ending process. For our migration we started installing Weblogic JARs
+    and even after installing 60+ Weblogic JARs the build was still failing.
+    Each time the build failed we had to determine which JAR contained the
+    missing class, then had to install that JAR. Also, sometimes even if you
+    install all the JARs some of the ANT tasks provided in the Appserver JARs,
+    might not work since it couldn't resolve the dependent JARs
+</p>
+<h2 id="head">5. Document different types of artifacts which need to be
+                created:</h2>
+ 
+<p>
+    Each Maven POM file is used to create just one artifact i.e. JAR, WAR, EAR,
+    TAR etc. So we need to determine different types of artifacts which needs
+    to be created and create sample POMs for that.
+</p>
+<p>
+    The <strong><u>pom.xml</u></strong> file is the core of a project's
+    configuration in Maven. It is a single configuration file that contains the
+    majority of information required to build a project in just the way you
+    want. The POM is huge and can be daunting in its complexity, but it is not
+    necessary to understand all of the intricacies just yet to use it
+    effectively.
+</p>
+<p>
+    In the application which we migrated we had to create the following
+    artifacts:
+</p>
+<p>
+    1. JAAS authentication JAR<br>
+    2. JAR<br>
+    3. EJB - Entity<br>
+    4. EJB - Session<br>
+    5. EJB - Message<br>
+    6. WAR<br>
+    7. EAR<br>
+    8. TAR<br>
+</p>
+
+   <h2 id="head">6: Determine if source code directory structure can be
+                refactored:</h2>
+
+<p>
+    Maven requires specific project structure to be in place for the POM to
+    work out of box.
+</p>
+<table border="1" cellspacing="0" cellpadding="5">
+    <tbody>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/main/java
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Application/Library sources
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/main/resources
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Application/Library resources
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/main/filters
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Resource filter files
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/main/webapp
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Web application sources
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/test/java
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Test sources
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/test/resources
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Test resources
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/test/filters
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Test resource filter files
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/it
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Integration Tests (primarily for plugins)
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/assembly
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Assembly descriptors
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    src/site
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Site
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    LICENSE.txt
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Project's license
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    NOTICE.txt
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Notices and attributions required by libraries that the
+                    project depends on
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="288" valign="top">
+                <p>
+                    README.txt
+                </p>
+            </td>
+            <td width="288" valign="top">
+                <p>
+                    Project's readme
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    Decide whether you want to rearrange the existing source code or you want
+    to maintain the existing directory structure as it is. In most cases it
+    will be tedious to re-arrange the code. Also, you may not to want disturb
+    the existing structure.
+</p>
+<h2 id="head">7. Start writing Maven POM files:</h2>
+
+<p>
+    Once you have understood the source code, ANT scripts and what artifacts
+    you have to build its time to write maven POM files.
+</p>
+<p>
+    Remember the following while writing the POM files:
+</p>
+<p>
+    1. An eclipse project can contain more than 1 POM.
+<br>
+    2. Write one POM to create each one of the artifacts identified. Once you
+    have done this, it will mostly copy paste to create similar artifacts.
+<br>
+    3. Using ANT you can copy Java classes from different projects and create a
+    single JAR out of it. But through Maven, you cannot create a single JAR -
+    the single JAR would be broken into multiple sub jars. This won't affect
+    the functionality.
+<br>
+    4. Try to use Skinny WAR plugin if the JARs are used by multiple WARs/EJBs.
+<br>
+    5. If an eclipse project contains more than 1 POM, then you have excluded
+    the MAVEN target directories explicitly.
+<br>
+    6. If you are using ANT tasks provided by Enterprise Appservers in the ANT
+    scripts then you can use them as in Maven.
+<br>
+    7. Create an environment variable for the Maven build number and use them
+    in the POMs. If you hard code it then you have modify in multiple places in
+    future.
+<br>
+    8. Create a Parent POM and call the sub POMs from parent POMs.
+<br>
+    9. If you haven't rearranged the directory structure then you have to
+    provide the source directory explicitly.
+</p>
+
+<img src="images/ant3.png" align="middle" style="width:900px;height:150px;border:solid;border-color:black"></center>
+
+<p>
+    The Sample POM :-
+</p>
+<center><img src="images/ant4.png" align="middle" style="width:900px;height:400px;border:solid;border-color:black"></center>
+
+<p>
+    
+    You executed the Maven goal archetype:generate, and passed in various
+parameters to that goal. The prefix archetype is the    <a href="https://maven.apache.org/plugins/index.html">plugin</a> that
+contains the goal. If you are familiar with    <a href="http://ant.apache.org/">Ant</a>, you may conceive of this as
+    similar to a task. This goal created a simple project based upon an
+    archetype. Suffice it to say for now that a plugin is a collection of goals
+    with a general common purpose.
+</p>
+<p>
+ 
+    Build the Project :-
+</p>
+<center><img src="images/ant5.png" align="middle" style="width:900px;height:30px;border:solid;border-color:black"></center>
+<p>
+    The command line will print out various actions, and end with the
+    following:
+</p>
+<center><img src="images/ant6.png" align="middle" style="width:900px;height:200px;border:solid;border-color:black"></center>
+<p>
+    Unlike the first command executed (archetype:generate) you may notice the
+    second is simply a single word - package. Rather than a goal, this is a
+    phase. A phase is a step in the
+    <a
+        href="https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html"
+    >
+        build lifecycle
+    </a>
+    , which is an ordered sequence of phases. When a phase is given, Maven will
+    execute every phase in the sequence up to and including the one defined.
+    For example, if we execute the compile phase, the phases that actually get
+    executed are:
+</p>
+<p>
+    1. validate
+<br>
+    2. generate-sources
+<br>
+    3. process-sources
+<br>
+    4. generate-resources
+<br>
+    5. process-resources
+<br>
+    6. compile
+</p>
+<h2 id="head">8: Running Maven Tools:</h2>
+    </a>
+    <strong><u></u></strong>
+</p>
+<p>
+ 
+    Maven Phases
+</p>
+<p>
+    Although hardly a comprehensive list, these are the most common default
+    lifecycle phases executed.
+</p>
+<ul>
+  <li><strong>validate</strong>: validate the project is correct and all
+    necessary information is available</li>
+ <li><strong>compile</strong>: compile the source code of the project</li>
+ <li><strong>test</strong>: test the compiled source code using a suitable
+    unit testing framework. These tests should not require the code be packaged
+    or deployed</li>
+ <li><strong>package</strong>: take the compiled code and package it in its
+    distributable format, such as a JAR.</li>
+ <li><strong>integration-test</strong>: process and deploy the package if
+    necessary into an environment where integration tests can be run</li>
+ <li><strong>verify</strong>: run any checks to verify the package is valid
+    and meets quality criteria</li>
+ <li><strong>install</strong>: install the package into the local repository,
+    for use as a dependency in other projects locally</li>
+ <li><strong>deploy</strong>: done in an integration or release environment,
+    copies the final package to the remote repository for sharing with other
+    developers and projects.</li>
+
+
+<p>There are two other Maven lifecycles of note beyond the default list above.
+    They are
+</p>
+<li><strong>clean</strong>: cleans up artifacts created by prior builds
+</li>
+<li><strong>site</strong>: generates site documentation for this project</li>
+</ul>
+<p>
+    Note:
+</p>
+<center><img src="images/ant7.png" align="middle" style="width:900px;height:30px;border:solid;border-color:black"></center>
+<p>
+    This command will clean the project, copy dependencies, and package the
+    project (executing all phases up to package, of course).
+</p>
+<p>
+   
+    Generating the Site :-
+</p>
+<center><img src="images/ant8.png" align="middle" style="width:900px;height:30px;border:solid;border-color:black"></center>
+<p>
+    This phase generates a site based upon information on the project's pom.
+    You can look at the documentation generated under target/site.
+</p>
+<h2 id="head">9: Compare the artifacts:</h2>
+    </a>
+
+<p>
+    Once you have generated the artifacts using the POMs it's time to compare
+    them with the artifacts generated using ANT. We used BeyondCompare for this
+    activity. This will help to statically compare the artifacts and make sure
+    they are same.
+</p></div>
+</td></tr>
+
+</table>
+</center>
+</div>
+<div class="syntel"><center>Syntel FXF-DevOps-Automation</center></div>
+</div>
+</html>
